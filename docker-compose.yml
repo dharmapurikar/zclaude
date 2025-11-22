@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  zclaude-test:
+    build: .
+    container_name: zclaude-test
+    stdin_open: true
+    tty: true
+    volumes:
+      # Mount the current directory to access the setup script
+      - ./:/app
+      # Preserve shell history
+      - zclaude_bash_history:/root/bash_history
+    environment:
+      - TERM=xterm-256color
+    working_dir: /app
+
+volumes:
+  zclaude_bash_history:
