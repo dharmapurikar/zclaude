@@ -98,6 +98,8 @@ docker run -it --rm -v $(pwd):/app zclaude-test
 
 After installation, you'll have access to both commands without any configuration switching:
 
+![Screenshot](images/Screenshot-2025-11-22-163803.png)
+
 ### Use Your Claude Code Pro / Max Subscription
 
 ```bash
