@@ -1,9 +1,31 @@
 # Z.AI ❤️ Claude Code Dual Setup
 
-A powerful setup script that allows you to run both Claude configurations side-by-side, enabling seamless switching between the default Claude CLI and Z.AI's enhanced version without changing your settings.
+**Tired of constantly switching between Claude Code configurations?** This script solves the common problem of having to choose between your Claude Code Pro / Max subscription and Z.AI Coding Plan. Now you can use both side-by-side with simple, separate commands - no more complicated file edits or Docker setups!
+
+## 🎯 Problem Solved
+
+### The Common Frustration:
+
+- **Claude Code Pro / Max Subscription**: You have a Pro / Max subscription that you want to use for certain tasks
+- **Z.AI Coding Plan**: You also have Z.AI's coding plan and want to use it for certain tasks
+- **Configuration Hell**: The official documentation tells you to edit `~/.claude/settings.json` to switch between them
+- **Constant Switching**: Every time you want to change providers, you have to manually edit configuration files
+- **Complicated Solutions**: Docker setups and other workarounds are complex and heavy-weight
+
+### The Simple Solution:
+
+```bash
+# Use your Claude Code Pro / Max subscription
+claude "Help me with planning my project"
+
+# Use Z.AI's coding plan with cheaper models
+zclaude "Help me with debugging this code"
+zclaude "Help me with building this project"
+```
 
 ## 🚀 Features
 
+- **Zero Configuration Switching**: Both commands work instantly without any file edits
 - **Dual Configuration**: Run both `claude` and `zclaude` commands simultaneously
 - **Smart Shell Detection**: Automatically detects and configures your shell (bash, zsh, fish, ksh, csh)
 - **MCP Server Integration**: Adds Z.AI MCP servers for enhanced functionality
@@ -22,12 +44,14 @@ A powerful setup script that allows you to run both Claude configurations side-b
 ### Quick Start
 
 1. **Download the setup script:**
+
    ```bash
-   curl -O https://your-repo/setup_zclaude.sh
+   curl -O https://raw.githubusercontent.com/dharmapurikar/zclaude/main/setup_zclaude.sh
    chmod +x setup_zclaude.sh
    ```
 
 2. **Run the setup:**
+
    ```bash
    ./setup_zclaude.sh
    ```
@@ -52,10 +76,12 @@ docker run -it --rm -v $(pwd):/app zclaude-test
 ## 🔧 What Gets Installed
 
 ### Claude CLI
+
 - Installs `@anthropic-ai/claude-code` via npm
 - Verifies installation and PATH configuration
 
 ### Shell Configuration
+
 - **bash**: `~/.bashrc` or `~/.bash_profile`
 - **zsh**: `~/.zshrc`
 - **fish**: `~/.config/fish/config.fish`
@@ -63,36 +89,41 @@ docker run -it --rm -v $(pwd):/app zclaude-test
 - **csh/tcsh**: `~/.cshrc`
 
 ### MCP Servers
+
 - `zai-mcp-server`: Z.AI's enhanced functionality
 - `web-search-prime`: Web search capabilities
 - `web-reader`: Web page reading functionality
 
 ## 📖 Usage
 
-After installation, you'll have access to both commands:
+After installation, you'll have access to both commands without any configuration switching:
 
-### Default Claude CLI
+### Use Your Claude Code Pro / Max Subscription
+
 ```bash
 claude --help
-claude "Help me with this code"
+claude "Review this professional document for quality"
+claude "Help me with advanced analysis"
 ```
 
-### Z.AI Enhanced Claude
+### Use Z.AI's Coding Plan
+
 ```bash
 zclaude --help
-zclaude "Help me with this code"
+zclaude "Debug this code"
+zclaude "Build this project with web search capabilities"
 ```
 
-### Switching Between Environments
-- Use `claude` for the standard Anthropic experience
-- Use `zclaude` for Z.AI's enhanced features and different models
+### When to Use Which:
 
-## 🌟 Z.AI Enhanced Features
+- **`claude`**: Professional tasks, document analysis, when you want to use your Claude Code Pro / Max subscription benefits
+- **`zclaude`**: Coding projects, debugging, when you want Z.AI's higher limits and capable models and MCP server capabilities
 
-- **Enhanced Models**: glm-4.5-air, glm-4.6
+## 🌟 Z.AI Features
+
+- **Higher Limits**: glm-4.5-air, glm-4.6
 - **Web Search**: Via web-search-prime MCP server
 - **Web Reading**: Via web-reader MCP server
-- **Extended Functionality**: Additional Z.AI-specific capabilities
 
 ## 🔍 Environment Variables
 
@@ -110,6 +141,7 @@ ANTHROPIC_AUTH_TOKEN="your-token"
 ## 🛠️ Shell-Specific Configurations
 
 ### Bash/ZSH/KSH
+
 ```bash
 zclaude_env() {
   ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
@@ -125,6 +157,7 @@ alias zclaude="zclaude_env"
 ```
 
 ### Fish Shell
+
 ```fish
 function zclaude_env
     set -gx ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"
@@ -140,6 +173,7 @@ alias zclaude=zclaude_env
 ```
 
 ### CSH/TCSH
+
 ```csh
 alias zclaude_env 'setenv ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"; \
 setenv API_TIMEOUT_MS "3000000"; \
@@ -157,17 +191,20 @@ alias zclaude zclaude_env
 ### Common Issues
 
 1. **Claude CLI not found:**
+
    ```bash
    npm install -g @anthropic-ai/claude-code
    ```
 
 2. **zclaude command not found:**
+
    ```bash
    # Reload your shell configuration
    source ~/.bashrc  # or ~/.zshrc, etc.
    ```
 
 3. **MCP servers not connecting:**
+
    ```bash
    # Check server status
    claude mcp list
@@ -191,7 +228,9 @@ alias zclaude zclaude_env
 To remove the Z.AI configuration:
 
 ### Manual Removal
+
 1. **Remove the zclaude configuration from your shell file:**
+
    ```bash
    # Edit your shell configuration file and remove the
    # Z.AI Claude Configuration section
@@ -205,6 +244,7 @@ To remove the Z.AI configuration:
    ```
 
 ### Clean Script
+
 You can also run the setup script again - it will automatically remove existing configurations before installing new ones.
 
 ## 📁 File Structure
@@ -233,9 +273,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - **Anthropic** for the Claude CLI
-- **Z.AI** for enhanced functionality and MCP servers
+- **Z.AI** for generous limits on awesome models and MCP servers
 - The open-source community for shell compatibility solutions
 
 ---
 
-**🚀 Enjoy using both Claude environments seamlessly!**
+**🚀 Enjoy using both Claude Code Pro / Max subscription and Z.AI Coding Plan seamlessly!**

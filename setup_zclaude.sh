@@ -17,13 +17,17 @@ NC='\033[0m' # No Color
 # ASCII Art Banner
 echo -e "\033[38;5;250m"  # Silver/gray color for Z.AI
 cat << "EOF"
-░█████████        ░███    ░██████                ░██████  ░██                              ░██                 ░██████                    ░██
-      ░██        ░██░██     ░██                 ░██   ░██ ░██                              ░██                ░██   ░██                   ░██
-     ░██        ░██  ░██    ░██       ░██      ░██        ░██  ░██████   ░██    ░██  ░████████  ░███████     ░██         ░███████   ░████████  ░███████
-   ░███        ░█████████   ░██     ░██████    ░██        ░██       ░██  ░██    ░██ ░██    ░██ ░██    ░██    ░██        ░██    ░██ ░██    ░██ ░██    ░██
-  ░██          ░██    ░██   ░██       ░██      ░██        ░██  ░███████  ░██    ░██ ░██    ░██ ░█████████    ░██        ░██    ░██ ░██    ░██ ░█████████
- ░██           ░██    ░██   ░██                 ░██   ░██ ░██ ░██   ░██  ░██   ░███ ░██   ░███ ░██            ░██   ░██ ░██    ░██ ░██   ░███ ░██
-░█████████ ░██ ░██    ░██ ░██████                ░██████  ░██  ░█████░██  ░█████░██  ░█████░██  ░███████       ░██████   ░███████   ░█████░██  ░███████
+ ███████████      █████████   █████                     █████████    █████████
+▒█▒▒▒▒▒▒███      ███▒▒▒▒▒███ ▒▒███         ███         ███▒▒▒▒▒███  ███▒▒▒▒▒███
+▒     ███▒      ▒███    ▒███  ▒███        ▒███        ███     ▒▒▒  ███     ▒▒▒
+     ███        ▒███████████  ▒███     ███████████   ▒███         ▒███
+    ███         ▒███▒▒▒▒▒███  ▒███    ▒▒▒▒▒███▒▒▒    ▒███         ▒███
+  ████     █    ▒███    ▒███  ▒███        ▒███       ▒▒███     ███▒▒███     ███
+ ███████████ ██ █████   █████ █████       ▒▒▒         ▒▒█████████  ▒▒█████████
+▒▒▒▒▒▒▒▒▒▒▒ ▒▒ ▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒                     ▒▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒▒▒
+
+
+
 EOF
 echo -e "\033[0m\033[38;5;208m"  # Orange color for Claude Code
 cat << "EOF"
@@ -31,17 +35,29 @@ cat << "EOF"
 EOF
 echo -e "\033[0m"
 
-echo -e "\033[38;5;250m\033[1m                    Z.AI ❤️ Claude Code Dual Setup\033[0m"
+echo -e "${BLUE}🚀 Welcome to the Z.AI Coding Plan ❤️ Claude Code Dual Setup Script!${NC}"
 echo
-
-echo -e "${BLUE}🚀 Welcome to the Z.AI ❤️ Claude Dual Setup Script!${NC}"
-echo -e "${YELLOW}This script allows you to run both Claude configurations side-by-side:${NC}"
-echo "  1. ✅ Check if Claude CLI is installed (or install it)"
-echo "  2. 🔑 Set up your Anthropic Auth Token"
-echo "  3. 🐚 Configure your shell with zclaude alias alongside default claude"
-echo "  4. 🌐 Add Z.AI MCP servers for enhanced functionality"
+echo -e "${YELLOW}🎯 Problem This Solves:${NC}"
+echo "   • Tired of editing ~/.claude/settings.json to switch providers?"
+echo "   • Want to use both Claude Pro AND Z.AI Coding Plan with claude code client?"
+echo "   • Need quick access to both without complex Docker setups?"
 echo
-echo -e "${CYAN}💡 Result: Seamlessly switch between two Claude environments without changing settings!${NC}"
+echo -e "${GREEN}💡 The Solution:${NC}"
+echo "   This script gives you TWO separate commands:"
+echo -e "   • ${CYAN}claude${NC}  - Uses your Claude Code Pro subscription"
+echo -e "   • ${CYAN}zclaude${NC} - Uses Z.AI's coding plan"
+echo
+echo -e "${YELLOW}📋 What We'll Set Up (Step-by-Step):${NC}"
+echo "  1. ✅ Install Claude CLI if needed (or verify existing installation)"
+echo "  2. 🔑 Configure your Anthropic Auth Token for Z.AI access"
+echo "  3. 🐚 Add 'zclaude' alias to your shell (keeps default 'claude' untouched)"
+echo "  4. 🌐 Configure Z.AI MCP servers for enhanced functionality"
+echo
+echo -e "${GREEN}🎉 End Result:${NC}"
+echo -e "   • ${CYAN}claude --help${NC}  → Your regular Claude Code Pro"
+echo -e "   • ${CYAN}zclaude --help${NC} → Z.AI's coding plan"
+echo "   • No more configuration file editing!"
+echo
 echo
 
 # Function to print colored status messages
@@ -249,6 +265,8 @@ manual_claude_installation() {
 
 # Step 1: Check if Claude is installed
 print_status "Step 1: Checking Claude CLI installation..."
+print_status "This ensures you have the base Claude CLI tool installed"
+print_status "Your existing 'claude' command configuration will NOT be modified"
 
 if ! command -v claude &> /dev/null; then
     print_warning "Claude CLI not found in PATH. Installing now..."
@@ -276,7 +294,9 @@ else
 fi
 
 # Step 2: Get Anthropic Auth Token
-print_status "Step 2: Setting up Anthropic Auth Token..."
+print_status "Step 2: Setting up Anthropic Auth Token for Z.AI access..."
+print_status "This token will be used ONLY for the 'zclaude' command"
+print_status "Your existing 'claude' command will continue using its current configuration"
 
 MAX_ATTEMPTS=3
 attempt=1
@@ -306,13 +326,15 @@ if [[ $attempt -gt $MAX_ATTEMPTS ]]; then
 fi
 
 # Step 3: Configure shell
-print_status "Step 3: Configuring shell with zclaude alias..."
+print_status "Step 3: Adding 'zclaude' command to your shell..."
+print_status "This creates a NEW command that doesn't interfere with your existing 'claude' command"
 
 SHELL_TYPE=$(detect_shell)
 RC_FILE=$(get_rc_file "$SHELL_TYPE")
 
 print_status "Detected shell: $SHELL_TYPE"
-print_status "Configuring file: $RC_FILE"
+print_status "Configuration file: $RC_FILE"
+print_status "Creating backup before making changes..."
 
 # Create backup of existing rc file
 if [[ -f "$RC_FILE" ]]; then
@@ -413,7 +435,8 @@ add_shell_config "$SHELL_TYPE" "$RC_FILE"
 print_success "Shell configuration added successfully! 🐚"
 
 # Step 4: Add MCP servers
-print_status "Step 4: Configuring Z.AI MCP servers..."
+print_status "Step 4: Configuring Z.AI MCP servers for enhanced functionality..."
+print_status "These provide additional capabilities like web search and reading for 'zclaude'"
 
 # Remove existing MCP servers first
 remove_existing_mcp_servers
@@ -448,8 +471,13 @@ claude mcp list 2>/dev/null || print_warning "Could not list MCP servers"
 echo
 echo -e "${GREEN}🎉 Setup completed successfully!${NC}"
 echo
-echo -e "${PURPLE}=== NEXT STEPS ===${NC}"
-echo -e "${YELLOW}1. Restart your terminal or run the following command to load the new configuration:${NC}"
+echo
+echo -e "${GREEN}🎉 Setup completed successfully!${NC}"
+echo
+echo -e "${PURPLE}=== How to Use Your Dual Setup ===${NC}"
+echo
+echo -e "${YELLOW}🔄 Load the new configuration:${NC}"
+echo -e "${YELLOW}1. Restart your terminal OR run:${NC}"
 
 # Shell-specific source command
 case "$SHELL_TYPE" in
@@ -466,18 +494,22 @@ case "$SHELL_TYPE" in
 esac
 
 echo
-echo -e "${YELLOW}2. Now you can use the 'zclaude' command:${NC}"
-echo -e "${CYAN}   zclaude --help${NC}"
-echo -e "${CYAN}   zclaude \"Hello, world!\"${NC}"
+echo -e "${YELLOW}🚀 Start using both commands:${NC}"
+echo -e "${GREEN}   claude \"Your professional task\"${NC}     ${GRAY}# Uses your Claude Code Pro${NC}"
+echo -e "${CYAN}   zclaude \"Your coding project\"${NC}     ${GRAY}# Uses Z.AI enhanced features${NC}"
+
 echo
-echo -e "${YELLOW}3. Check your MCP servers:${NC}"
-echo -e "${CYAN}   claude mcp list${NC}"
+echo -e "${YELLOW}💡 Quick Test:${NC}"
+echo -e "${CYAN}   claude --version${NC}    # Check your regular Claude"
+echo -e "${CYAN}   zclaude --version${NC}   # Check Z.AI version"
+echo -e "${CYAN}   claude mcp list${NC}     # See MCP servers"
 echo
-echo -e "${PURPLE}=== FEATURES ===${NC}"
-echo "✨ Enhanced models: glm-4.5-air, glm-4.6"
-echo "🔍 Web search capabilities via web-search-prime"
-echo "📖 Web page reading via web-reader"
-echo "🤖 Z.AI integration for extended functionality"
+echo -e "${PURPLE}=== What You Now Have ===${NC}"
+echo -e "${GREEN}✅${NC} Dual command setup (no more config file editing!)"
+echo -e "${GREEN}✅${NC} Z.AI higher limits on models: glm-4.5-air, glm-4.6"
+echo -e "${GREEN}✅${NC} Web search via web-search-prime MCP server"
+echo -e "${GREEN}✅${NC} Web page reading via web-reader MCP server"
+echo -e "${GREEN}✅${NC} Seamless switching between Claude Code Pro and Z.AI Coding Plan"
 echo
 echo -e "${GREEN}Enjoy using zclaude! 🚀${NC}"
 echo
@@ -485,6 +517,3 @@ echo -e "${BLUE}If you encounter any issues, please:${NC}"
 echo "• Check your internet connection"
 echo "• Verify your API token is correct"
 echo "• Ensure all dependencies are installed"
-echo
-echo -e "${CYAN}Documentation: https://docs.claude.com${NC}"
-echo -e "${CYAN}Support: https://github.com/anthropics/claude-code/issues${NC}"
