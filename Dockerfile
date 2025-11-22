@@ -35,16 +35,16 @@ RUN chmod +x /app/setup_zclaude.sh
 # Set up a default shell (bash)
 SHELL ["/bin/bash", "-c"]
 
-# Add message for users
-RUN echo "=========================================" > /app/MOTD.txt && \
-    echo "Z.AI Claude Test Environment" >> /app/MOTD.txt && \
-    echo "=========================================" >> /app/MOTD.txt && \
-    echo "To run the setup script:" >> /app/MOTD.txt && \
-    echo "  ./setup_zclaude.sh" >> /app/MOTD.txt && \
-    echo "" >> /app/MOTD.txt && \
-    echo "After setup, you can use:" >> /app/MOTD.txt && \
-    echo "  zclaude --help" >> /app/MOTD.txt && \
-    echo "=========================================" >> /app/MOTD.txt
+# Add message for users in a location that won't be overwritten
+RUN echo "=========================================" > /etc/motd && \
+    echo "Z.AI Claude Test Environment" >> /etc/motd && \
+    echo "=========================================" >> /etc/motd && \
+    echo "To run the setup script:" >> /etc/motd && \
+    echo "  ./setup_zclaude.sh" >> /etc/motd && \
+    echo "" >> /etc/motd && \
+    echo "After setup, you can use:" >> /etc/motd && \
+    echo "  zclaude --help" >> /etc/motd && \
+    echo "=========================================" >> /etc/motd
 
 # Display the message when container starts
-CMD ["/bin/bash", "-c", "cat /app/MOTD.txt && echo '' && exec /bin/bash"]
+CMD ["/bin/bash", "-c", "cat /etc/motd && echo '' && echo 'Setup script available at: /app/setup_zclaude.sh' && echo '' && exec /bin/bash"]
