@@ -37,7 +37,7 @@ zclaude "Help me with building this project"
 
 - Node.js and npm (for Claude CLI installation)
 - Internet connection for downloading packages
-- Your Anthropic API token
+- Your Z.AI Coding Plan API token
 
 ## 🛠️ Installation
 
@@ -57,7 +57,7 @@ zclaude "Help me with building this project"
    ```
 
 3. **Follow the prompts:**
-   - Enter your Anthropic Auth Token when prompted
+   - Enter your Z.AI Coding Plan API Token when prompted
    - The script will detect your shell and configure everything automatically
 
 ### Docker Testing
