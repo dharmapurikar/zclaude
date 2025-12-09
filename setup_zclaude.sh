@@ -14,6 +14,13 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
+# Model names for Z.AI
+GLM_HAIKU_MODEL="glm-4.5-air"
+GLM_SONNET_MODEL="glm-4.6v"
+GLM_OPUS_MODEL="glm-4.6v"
+
+
+
 # ASCII Art Banner
 echo -e "\033[38;5;250m"  # Silver/gray color for Z.AI
 cat << "EOF"
@@ -359,9 +366,9 @@ add_shell_config() {
 zclaude_env() {
   ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \\
   API_TIMEOUT_MS="3000000" \\
-  ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air" \\
-  ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.6" \\
-  ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.6" \\
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="$GLM_HAIKU_MODEL" \\
+  ANTHROPIC_DEFAULT_SONNET_MODEL="$GLM_SONNET_MODEL" \\
+  ANTHROPIC_DEFAULT_OPUS_MODEL="$GLM_OPUS_MODEL" \\
   ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_TOKEN" \\
   claude "\$@"
 }
@@ -377,9 +384,9 @@ EOF
 function zclaude_env
     set -gx ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"
     set -gx API_TIMEOUT_MS "3000000"
-    set -gx ANTHROPIC_DEFAULT_HAIKU_MODEL "glm-4.5-air"
-    set -gx ANTHROPIC_DEFAULT_SONNET_MODEL "glm-4.6"
-    set -gx ANTHROPIC_DEFAULT_OPUS_MODEL "glm-4.6"
+    set -gx ANTHROPIC_DEFAULT_HAIKU_MODEL "$GLM_HAIKU_MODEL"
+    set -gx ANTHROPIC_DEFAULT_SONNET_MODEL "$GLM_SONNET_MODEL"
+    set -gx ANTHROPIC_DEFAULT_OPUS_MODEL "$GLM_OPUS_MODEL"
     set -gx ANTHROPIC_AUTH_TOKEN "$ANTHROPIC_TOKEN"
     claude \$argv
 end
@@ -394,9 +401,9 @@ EOF
 # Z.AI Claude Configuration - Added on $(date)
 alias zclaude_env 'setenv ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"; \
 setenv API_TIMEOUT_MS "3000000"; \
-setenv ANTHROPIC_DEFAULT_HAIKU_MODEL "glm-4.5-air"; \
-setenv ANTHROPIC_DEFAULT_SONNET_MODEL "glm-4.6"; \
-setenv ANTHROPIC_DEFAULT_OPUS_MODEL "glm-4.6"; \
+setenv ANTHROPIC_DEFAULT_HAIKU_MODEL "$GLM_HAIKU_MODEL"; \
+setenv ANTHROPIC_DEFAULT_SONNET_MODEL "$GLM_SONNET_MODEL"; \
+setenv ANTHROPIC_DEFAULT_OPUS_MODEL "$GLM_OPUS_MODEL"; \
 setenv ANTHROPIC_AUTH_TOKEN "$ANTHROPIC_TOKEN"; \
 claude \!*'
 
@@ -412,9 +419,9 @@ EOF
 zclaude_env() {
   ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
   API_TIMEOUT_MS="3000000" \
-  ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air" \
-  ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.6" \
-  ANTHROPIC_DEFAULT_OPUS_MODEL="glm-4.6" \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="$GLM_HAIKU_MODEL" \
+  ANTHROPIC_DEFAULT_SONNET_MODEL="$GLM_SONNET_MODEL" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL="$GLM_OPUS_MODEL" \
   ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_TOKEN" \
   claude "\$@"
 }
