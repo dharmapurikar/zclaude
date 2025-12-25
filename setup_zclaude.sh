@@ -14,12 +14,10 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Model names for Z.AI
-GLM_HAIKU_MODEL="glm-4.5-air"
-GLM_SONNET_MODEL="glm-4.6v"
-GLM_OPUS_MODEL="glm-4.6v"
-
-
+# Model configuration - Change these to update model names everywhere
+DEFAULT_HAIKU_MODEL="glm-4.5-air"
+DEFAULT_SONNET_MODEL="glm-4.6"
+DEFAULT_OPUS_MODEL="glm-4.6"
 
 # ASCII Art Banner
 echo -e "\033[38;5;250m"  # Silver/gray color for Z.AI
@@ -366,9 +364,9 @@ add_shell_config() {
 zclaude_env() {
   ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \\
   API_TIMEOUT_MS="3000000" \\
-  ANTHROPIC_DEFAULT_HAIKU_MODEL="$GLM_HAIKU_MODEL" \\
-  ANTHROPIC_DEFAULT_SONNET_MODEL="$GLM_SONNET_MODEL" \\
-  ANTHROPIC_DEFAULT_OPUS_MODEL="$GLM_OPUS_MODEL" \\
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="$DEFAULT_HAIKU_MODEL" \\
+  ANTHROPIC_DEFAULT_SONNET_MODEL="$DEFAULT_SONNET_MODEL" \\
+  ANTHROPIC_DEFAULT_OPUS_MODEL="$DEFAULT_OPUS_MODEL" \\
   ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_TOKEN" \\
   claude "\$@"
 }
@@ -384,9 +382,9 @@ EOF
 function zclaude_env
     set -gx ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"
     set -gx API_TIMEOUT_MS "3000000"
-    set -gx ANTHROPIC_DEFAULT_HAIKU_MODEL "$GLM_HAIKU_MODEL"
-    set -gx ANTHROPIC_DEFAULT_SONNET_MODEL "$GLM_SONNET_MODEL"
-    set -gx ANTHROPIC_DEFAULT_OPUS_MODEL "$GLM_OPUS_MODEL"
+    set -gx ANTHROPIC_DEFAULT_HAIKU_MODEL "$DEFAULT_HAIKU_MODEL"
+    set -gx ANTHROPIC_DEFAULT_SONNET_MODEL "$DEFAULT_SONNET_MODEL"
+    set -gx ANTHROPIC_DEFAULT_OPUS_MODEL "$DEFAULT_OPUS_MODEL"
     set -gx ANTHROPIC_AUTH_TOKEN "$ANTHROPIC_TOKEN"
     claude \$argv
 end
@@ -401,9 +399,9 @@ EOF
 # Z.AI Claude Configuration - Added on $(date)
 alias zclaude_env 'setenv ANTHROPIC_BASE_URL "https://api.z.ai/api/anthropic"; \
 setenv API_TIMEOUT_MS "3000000"; \
-setenv ANTHROPIC_DEFAULT_HAIKU_MODEL "$GLM_HAIKU_MODEL"; \
-setenv ANTHROPIC_DEFAULT_SONNET_MODEL "$GLM_SONNET_MODEL"; \
-setenv ANTHROPIC_DEFAULT_OPUS_MODEL "$GLM_OPUS_MODEL"; \
+setenv ANTHROPIC_DEFAULT_HAIKU_MODEL "$DEFAULT_HAIKU_MODEL"; \
+setenv ANTHROPIC_DEFAULT_SONNET_MODEL "$DEFAULT_SONNET_MODEL"; \
+setenv ANTHROPIC_DEFAULT_OPUS_MODEL "$DEFAULT_OPUS_MODEL"; \
 setenv ANTHROPIC_AUTH_TOKEN "$ANTHROPIC_TOKEN"; \
 claude \!*'
 
@@ -419,9 +417,9 @@ EOF
 zclaude_env() {
   ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic" \
   API_TIMEOUT_MS="3000000" \
-  ANTHROPIC_DEFAULT_HAIKU_MODEL="$GLM_HAIKU_MODEL" \
-  ANTHROPIC_DEFAULT_SONNET_MODEL="$GLM_SONNET_MODEL" \
-  ANTHROPIC_DEFAULT_OPUS_MODEL="$GLM_OPUS_MODEL" \
+  ANTHROPIC_DEFAULT_HAIKU_MODEL="$DEFAULT_HAIKU_MODEL" \
+  ANTHROPIC_DEFAULT_SONNET_MODEL="$DEFAULT_SONNET_MODEL" \
+  ANTHROPIC_DEFAULT_OPUS_MODEL="$DEFAULT_OPUS_MODEL" \
   ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_TOKEN" \
   claude "\$@"
 }
@@ -513,7 +511,7 @@ echo -e "${CYAN}   claude mcp list${NC}     # See MCP servers"
 echo
 echo -e "${PURPLE}=== What You Now Have ===${NC}"
 echo -e "${GREEN}✅${NC} Dual command setup (no more config file editing!)"
-echo -e "${GREEN}✅${NC} Z.AI higher limits on models: glm-4.5-air, glm-4.6"
+echo -e "${GREEN}✅${NC} Z.AI higher limits on models: $DEFAULT_HAIKU_MODEL, $DEFAULT_SONNET_MODEL"
 echo -e "${GREEN}✅${NC} Web search via web-search-prime MCP server"
 echo -e "${GREEN}✅${NC} Web page reading via web-reader MCP server"
 echo -e "${GREEN}✅${NC} Seamless switching between Claude Code Pro and Z.AI Coding Plan"
