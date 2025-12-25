@@ -16,8 +16,8 @@ NC='\033[0m' # No Color
 
 # Model configuration - Change these to update model names everywhere
 DEFAULT_HAIKU_MODEL="glm-4.5-air"
-DEFAULT_SONNET_MODEL="glm-4.6"
-DEFAULT_OPUS_MODEL="glm-4.6"
+DEFAULT_SONNET_MODEL="glm-4.7"
+DEFAULT_OPUS_MODEL="glm-4.7"
 
 # ASCII Art Banner
 echo -e "\033[38;5;250m"  # Silver/gray color for Z.AI
